@@ -29,7 +29,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--dark-bg);
+            background: #000000;
             color: var(--text-primary);
             overflow-x: hidden;
         }
@@ -42,6 +42,12 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        #particles.visible {
+            opacity: 1;
         }
         
         /* Navigation */
@@ -472,7 +478,7 @@
         <div class="hero-content">
             <h1 class="typewriter">The Future of Decentralization</h1>
             <p>Unleash the power of autonomous smart contracts with ScriptHub's revolutionary TriggerSync Engine and Stateless State Simulation protocol.</p>
-            <button class="cta-button floating">Launch Dashboard</button>
+            <button class="cta-button floating" id="launch-dashboard">Launch Dashboard</button>
         </div>
     </section>
     
@@ -661,6 +667,18 @@
         
         animateParticles();
         
+        // Show particles when scrolling past hero section
+        window.addEventListener('scroll', () => {
+            const particles = document.getElementById('particles');
+            const heroHeight = document.querySelector('.hero').offsetHeight;
+            
+            if (window.scrollY > heroHeight * 0.8) {
+                particles.classList.add('visible');
+            } else {
+                particles.classList.remove('visible');
+            }
+        });
+        
         // Scroll Animations
         const observerOptions = {
             threshold: 0.1,
@@ -709,6 +727,7 @@
         // Phantom Wallet Integration
         async function connectPhantomWallet() {
             const connectButton = document.getElementById('connect-wallet');
+            const launchButton = document.getElementById('launch-dashboard');
             
             // Check if Phantom is installed
             if (!window.solana || !window.solana.isPhantom) {
@@ -721,25 +740,33 @@
                 const response = await window.solana.connect();
                 const publicKey = response.publicKey.toString();
                 
-                // Update button text and log public key
+                // Update both buttons
                 connectButton.textContent = 'Connected';
                 connectButton.style.background = 'linear-gradient(135deg, #00FF00 0%, #008000 100%)';
                 connectButton.style.cursor = 'default';
                 
+                launchButton.textContent = 'Connected';
+                launchButton.style.background = 'linear-gradient(135deg, #00FF00 0%, #008000 100%)';
+                launchButton.style.cursor = 'default';
+                
                 console.log('Phantom Wallet Connected!');
                 console.log('Public Key:', publicKey);
                 
-                // Disable further clicks
+                // Disable further clicks on both buttons
                 connectButton.onclick = null;
+                launchButton.onclick = null;
                 
             } catch (error) {
                 console.error('Failed to connect to Phantom wallet:', error);
-                alert('Failed to connect to Phantom wallet. Please try again.');
+                // Removed the alert message - silently handle the error
             }
         }
         
         // Add click event listener to connect wallet button
         document.getElementById('connect-wallet').addEventListener('click', connectPhantomWallet);
+        
+        // Add the same functionality to Launch Dashboard button
+        document.getElementById('launch-dashboard').addEventListener('click', connectPhantomWallet);
         
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
