@@ -98,6 +98,13 @@
             text-shadow: 0 0 10px var(--primary-white);
         }
         
+        /* Twitter/X button hover effects */
+        a[href*="x.com"]:hover {
+            color: var(--primary-white) !important;
+            text-shadow: 0 0 15px var(--primary-white);
+            transform: scale(1.2);
+        }
+        
         .connect-wallet {
             background: var(--gradient-1);
             border: none;
@@ -469,6 +476,7 @@
                 <li><a href="#tokenomics">Tokenomics</a></li>
                 <li><a href="#governance">Governance</a></li>
                 <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="https://x.com/ScriptHubTech" target="_blank" rel="noopener" style="color: var(--primary-white); font-size: 1.2rem;">𝕏</a></li>
             </ul>
             <button class="connect-wallet" id="connect-wallet">Connect Wallet</button>
         </div>
@@ -611,11 +619,17 @@
         </div>
     </section>
     
-    <section style="text-align: center; padding: 6rem 2rem;">
-        <h2 class="section-title fade-in">Ready to Script the Future?</h2>
-        <p class="section-subtitle fade-in">Join thousands of developers building the next generation of autonomous applications.</p>
-        <button class="cta-button glow">Join the Revolution</button>
-    </section>
+    <!-- Footer -->
+    <footer style="background: #000000; border-top: 1px solid var(--glass-border); padding: 3rem 2rem; text-align: center;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                <div class="logo" style="font-size: 1.8rem;">ScriptHub</div>
+                <a href="https://x.com/ScriptHubTech" target="_blank" rel="noopener" style="color: var(--primary-white); font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease;">𝕏</a>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">The Future of Decentralization</p>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">© 2025 ScriptHub. All rights reserved.</p>
+        </div>
+    </footer>
     
     <script>
         // Particle Background
